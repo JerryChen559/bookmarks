@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import logo from "./logo.svg";
+import smiley from "./Happy_smiley_face.png";
 import "./App.css";
 
 const App = () => {
@@ -9,15 +10,16 @@ const App = () => {
   return (
     <Fragment className="App">
       <nav className="navigation">
-        Edit <code>src/App.js</code> and save to reload.
+        {/* Edit <code>src/App.js</code> and save to reload. */}
         <a>
-          <img src={logo} className="App-logo" alt="logo" />
-          <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>React</li>
-          </ul>
+          <img height="40px" src={smiley} className="App-logo" alt="logo" />
+          {/* <img height="40px" src={smiley} /> */}
         </a>
+        <ul>
+          <li>Home</li>
+          {/* <li>About</li> */}
+          {/* <li>React</li> */}
+        </ul>
       </nav>
       <main>
         <div className="leftContent">
