@@ -53,7 +53,7 @@ const App = () => {
           </form>
         </div>
         <div className="rightContent">
-          {/* <h2>21m</h2> */}
+          {/* <h2>25:45m</h2> */}
           <div style={linkImageStyle} />
           <div>
             <h2>
