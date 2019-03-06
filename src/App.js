@@ -1,12 +1,33 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
+import ReactDom from "react-dom";
 import logo from "./logo.svg";
 import smiley from "./Happy_smiley_face.png";
 import "./App.css";
+import LinkCard from "./Components/LinkCard";
 
 const App = () => {
-  const linkImageStyle = {
-    // backgroundImage: 'url(\'blahblahblah\')'
+  const [cardData, setCardData] = useState([
+    { linkName: "my link", linkHref: "https://github.com" }
+  ]);
+
+  const [newCard, setNewCard] = useState({ linkName: "", linkHref: "" });
+
+  // combination of CDM and CDU
+  // useEffect(() => {
+  //   API.ping("asdf");
+
+  //   return () => {
+  //     API.stopPing();
+  //   };
+  // });
+
+  const dispatchCardSet = payload => {
+    let oldArray = cardData;
+    let newArray = [...oldArray, payload];
+    setCardData(newArray);
+    setNewCard({ linkName: "", linkHref: "" });
   };
+
   return (
     <Fragment className="App">
       <nav className="navigation">
@@ -17,20 +38,23 @@ const App = () => {
         </a>
         <ul>
           <li>Home</li>
-          {/* <li>About</li> */}
-          {/* <li>React</li> */}
         </ul>
       </nav>
       <main>
         <div className="leftContent">
           <img src={logo} className="App-logo" alt="logo" />
-          <form action="">
+
+          <form onSubmit={e => e.preventDefault()}>
             <h2 className="formTitle">Add a bookmark </h2>
             <div>
               <label htmlFor="linkTitle" className="formLabel">
                 Enter a bookmark name
               </label>
               <input
+                value={newCard.linkName}
+                onChange={e =>
+                  setNewCard({ ...newCard, linkName: e.currentTarget.value })
+                }
                 type="text"
                 name="linkTitle"
                 minLength="1"
@@ -43,108 +67,22 @@ const App = () => {
                 Enter a bookmark name
               </label>
               <input
+                value={newCard.linkHref}
+                onChange={e =>
+                  setNewCard({ ...newCard, linkHref: e.currentTarget.value })
+                }
                 type="text"
                 name="linkHref"
                 minLength="7"
                 placeholder="https://example.com/"
               />
             </div>
-            <button>Add</button>
+            <button onClick={() => dispatchCardSet(newCard)}>Add</button>
           </form>
         </div>
         <div className="rightContent">
-          {/* <h2>25:45m</h2> */}
-          {/* <h2>40m</h2> */}
-          <div className="linkCard">
-            <div className="linkCardImage" style={linkImageStyle}>
-              IMAGE
-            </div>
-            <div className="linkCardLink">
-              <h2>
-                <a href="#">my link</a>
-              </h2>
-            </div>
-          </div>
-          <div className="linkCard">
-            <div className="linkCardImage" style={linkImageStyle}>
-              IMAGE
-            </div>
-            <div className="linkCardLink">
-              <h2>
-                <a href="#">my link</a>
-              </h2>
-            </div>
-          </div>
-          <div className="linkCard">
-            <div className="linkCardImage" style={linkImageStyle}>
-              IMAGE
-            </div>
-            <div className="linkCardLink">
-              <h2>
-                <a href="#">my link</a>
-              </h2>
-            </div>
-          </div>
-          <div className="linkCard">
-            <div className="linkCardImage" style={linkImageStyle}>
-              IMAGE
-            </div>
-            <div className="linkCardLink">
-              <h2>
-                <a href="#">my link</a>
-              </h2>
-            </div>
-          </div>
-          <div className="linkCard">
-            <div className="linkCardImage" style={linkImageStyle}>
-              IMAGE
-            </div>
-            <div className="linkCardLink">
-              <h2>
-                <a href="#">my link</a>
-              </h2>
-            </div>
-          </div>
-          <div className="linkCard">
-            <div className="linkCardImage" style={linkImageStyle}>
-              IMAGE
-            </div>
-            <div className="linkCardLink">
-              <h2>
-                <a href="#">my link</a>
-              </h2>
-            </div>
-          </div>
-          <div className="linkCard">
-            <div className="linkCardImage" style={linkImageStyle}>
-              IMAGE
-            </div>
-            <div className="linkCardLink">
-              <h2>
-                <a href="#">my link</a>
-              </h2>
-            </div>
-          </div>
-          <div className="linkCard">
-            <div className="linkCardImage" style={linkImageStyle}>
-              IMAGE
-            </div>
-            <div className="linkCardLink">
-              <h2>
-                <a href="#">my link</a>
-              </h2>
-            </div>
-          </div>
-          <div className="linkCard">
-            <div className="linkCardImage" style={linkImageStyle}>
-              IMAGE
-            </div>
-            <div className="linkCardLink">
-              <h2>
-                <a href="#">my link</a>
-              </h2>
-            </div>
-          </div>
+          {/* <h2>1:04:22</h2> */}
+          <LinkCard cards={cardData} />
         </div>
       </main>
     </Fragment>
